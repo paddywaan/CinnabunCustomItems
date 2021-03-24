@@ -1,0 +1,10 @@
+{
+  "name": "ValheimPluginTemplate",
+  "description": "",
+  "version_number": "1.0.0",
+  "website_url": "https://github.com/paddywaan/PaddysVHMods/",
+  "dependencies": [
+    "denikson-BepInExPack_Valheim-5.4.601",
+    "ValheimModding-HookGenPatcher-0.0.1"
+  ]
+}
