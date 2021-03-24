@@ -243,6 +243,7 @@
     </Reference>
     <Reference Include="ValheimLib, Version=0.0.13.0, Culture=neutral, PublicKeyToken=null">
       <HintPath>D:\Program Files (x86)\Steam\steamapps\common\Valheim\BepInEx\plugins\ValheimLib.dll</HintPath>
+      <Private>False</Private>
     </Reference>
   </ItemGroup>
   <ItemGroup>

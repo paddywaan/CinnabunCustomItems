@@ -38,8 +38,8 @@ namespace Backpack
         public void Start()
         {
             Hooks.Init();
-            CustomItem backpack = new CustomItem(ModAssets.Instance.Backpack, true);
-            //ObjectDBHelper.Add(backpack);
+            
+            ObjectDBHelper.Add(ModAssets.Instance.BackpackItem);
         }
     }
     
