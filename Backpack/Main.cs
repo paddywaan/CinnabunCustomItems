@@ -38,7 +38,6 @@ namespace Backpack
         public void Start()
         {
             Hooks.Init();
-            
             ObjectDBHelper.Add(ModAssets.Instance.BackpackItem);
         }
     }

@@ -15,7 +15,6 @@ namespace Backpack
         static Config()
         {
             genSettings = new ConfigFile(Path.Combine(BepInEx.Paths.ConfigPath, Main.GUID + ".cfg"), true);
-            genSettings.Bind("SETTINGS", "NEW SETTING", "", "Does things");
         }
     }
 }
