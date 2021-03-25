@@ -7,12 +7,17 @@ namespace Backpack
 {
     public class ModAssets
     {
+        #region Localisation
+        private const string BackpackToken = "$item_cape_ironbackpack",
+             BackpackName = "Rugged Backpack",
+             BackpackDescriptionToken = "$item_cape_ironbackpack_description",
+             BackpackDescriptionText = "A Rugged backpack, complete with buckles and fine leather straps.";
+        #endregion
         public AssetBundle BackpackAssetBundle;
         private GameObject BackpackPrefab;
         public CustomItem BackpackItem;
         public CustomRecipe BackpackRecipe;
-        private const string BackPackToken = "$item_cape_ironbackpack";
-        private const string BackPackName = "Rugged Backpack";
+        
         private static ModAssets instance;
         public static ModAssets Instance
         {
@@ -39,6 +44,7 @@ namespace Backpack
                 BackpackItem = new CustomItem(BackpackPrefab, true);
                 var recipe = ScriptableObject.CreateInstance<Recipe>();
                 recipe.m_item = BackpackPrefab.GetComponent<ItemDrop>();
+                recipe.m_craftingStation = Mock<CraftingStation>.Create("piece_workbench");
                 var recipeIngredients = new List<Piece.Requirement>
                 {
                     MockRequirement.Create("LeatherScraps", 10),
@@ -46,17 +52,12 @@ namespace Backpack
                     MockRequirement.Create("Iron", 4),
                 };
                 recipe.m_resources = recipeIngredients.ToArray();
-                BackpackRecipe = new CustomRecipe(recipe, false, true);
+                BackpackRecipe = new CustomRecipe(recipe, true, true);
+                
                 ObjectDBHelper.Add(BackpackRecipe);
-                Language.AddToken(BackPackToken, BackPackName);
+                Language.AddToken(BackpackToken, BackpackName);
+                Language.AddToken(BackpackDescriptionToken, BackpackDescriptionText);
             }
-            // SkillUp = Assets.LoadAsset<GameObject>("SkillUpFixed");
-            // //var notify = SkillUp.GetComponent<SkillNotify>();
-            //
-            //
-            //
-            // if (!SkillUp) Main.log.LogError($"Asset loading failed for:{SkillUp}");
-            // NotificationLayer = Assets.LoadAsset<GameObject>("NotificationLayer");
         }
     }
 }
