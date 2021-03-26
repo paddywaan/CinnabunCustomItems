@@ -247,9 +247,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BoneSetter.cs" />
     <Compile Include="Config.cs" />
-    <Compile Include="ExtentionMethods.cs" />
     <Compile Include="Hooks.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="ModAssets.cs" />
