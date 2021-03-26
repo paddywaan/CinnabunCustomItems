@@ -45,7 +45,8 @@ namespace Backpack
                 MockRequirement.Create("DeerHide", 2),
                 MockRequirement.Create("Iron", 4),
             });
-            SilverBackpackPrefab = InitPrefab(ab, "Assets/Evie/CapeSilverBackpack.prefab");
+            SilverBackpackPrefab = InitPrefab(ab, 
+                "Assets/Evie/CapeSilverBackpack.prefab");
             LoadCraftedItem(SilverBackpackPrefab, new List<Piece.Requirement>
             {
                 MockRequirement.Create("LeatherScraps", 5),

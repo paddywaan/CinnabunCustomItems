@@ -63,16 +63,6 @@ namespace Backpack.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
-        internal static byte[] capeironbackpack {
-            get {
-                object obj = ResourceManager.GetObject("capeironbackpack", resourceCulture);
-                return ((byte[])(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Byte[].
-        /// </summary>
         internal static byte[] eviesbackpacks {
             get {
                 object obj = ResourceManager.GetObject("eviesbackpacks", resourceCulture);
