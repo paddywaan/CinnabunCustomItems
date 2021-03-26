@@ -131,6 +131,7 @@
     </Reference>
     <Reference Include="UnityEngine.AssetBundleModule">
       <HintPath>$(GameDir)\$(UnityCoreDir)\UnityEngine.AssetBundleModule.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.AudioModule">
       <HintPath>$(GameDir)\$(UnityCoreDir)\UnityEngine.AudioModule.dll</HintPath>
@@ -246,7 +247,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BoneSetter.cs" />
     <Compile Include="Config.cs" />
+    <Compile Include="ExtentionMethods.cs" />
     <Compile Include="Hooks.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="ModAssets.cs" />
@@ -255,8 +258,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Content Include="GameDir.targets" />
     <Content Include="Package\icon.png" />
     <Content Include="Resources\capeironbackpack" />
+    <Content Include="Resources\eviesbackpacks" />
     <None Include="Package\manifest.json" />
     <None Include="Package\README.md" />
     <None Include="README.md" />

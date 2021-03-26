@@ -12,8 +12,7 @@ namespace Backpack
     {
         internal static void Init()
         {
-            //IL.*
-            //On.*
-        }
+
+    }
     }
 }

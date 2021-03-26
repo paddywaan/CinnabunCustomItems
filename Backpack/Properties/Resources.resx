@@ -121,4 +121,25 @@
   <data name="capeironbackpack" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\capeironbackpack;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="eviesbackpacks" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\eviesbackpacks;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="$item_cape_ironbackpack" xml:space="preserve">
+    <value>Rugged Backpack</value>
+  </data>
+  <data name="$item_cape_ironbackpack_description" xml:space="preserve">
+    <value>A Rugged backpack, complete with buckles and fine leather straps.</value>
+  </data>
+  <data name="$se_ironbackpackstrength_start" xml:space="preserve">
+    <value>Your carry capacity has been increased.</value>
+  </data>
+  <data name="$item_cape_silverbackpack" xml:space="preserve">
+    <value>Fine Backpack</value>
+  </data>
+  <data name="$item_cape_silverbackpack_description" xml:space="preserve">
+    <value>A Fine backpack, comprised of high quality leather, adorned with silver furnishings.</value>
+  </data>
+  <data name="$se_silverbackpackstrength_start" xml:space="preserve">
+    <value>Your carry capacity has been increased.</value>
+  </data>
 </root>
