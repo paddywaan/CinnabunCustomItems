@@ -5,6 +5,7 @@ using System.IO;
 using System.Reflection;
 using ValheimLib;
 using ValheimLib.ODB;
+using ValheimLib.Util;
 
 
 namespace Backpack
@@ -38,7 +39,8 @@ namespace Backpack
         public void Start()
         {
             Hooks.Init();
-            ObjectDBHelper.Add(ModAssets.Instance.BackpackItem);
+            ModAssets.Instance.Init();
+            BoneReorder.Apply();
         }
     }
     

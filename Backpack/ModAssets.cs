@@ -1,23 +1,18 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Globalization;
+using System.Reflection;
+using System.Resources;
 using UnityEngine;
 using ValheimLib;
 using ValheimLib.ODB;
+using Resources = Backpack.Properties.Resources;
 
 namespace Backpack
 {
     public class ModAssets
     {
-        #region Localisation
-        private const string BackpackToken = "$item_cape_ironbackpack",
-             BackpackName = "Rugged Backpack",
-             BackpackDescriptionToken = "$item_cape_ironbackpack_description",
-             BackpackDescriptionText = "A Rugged backpack, complete with buckles and fine leather straps.";
-        #endregion
-        public AssetBundle BackpackAssetBundle;
-        private GameObject BackpackPrefab;
-        public CustomItem BackpackItem;
-        public CustomRecipe BackpackRecipe;
-        
         private static ModAssets instance;
         public static ModAssets Instance
         {
@@ -28,35 +23,71 @@ namespace Backpack
             }
         
         }
+        
+        private GameObject IronBackpackPrefab;
+
+        private GameObject SilverBackpackPrefab;
 
         ModAssets()
         {
-            LoadAssets();
+           
+        }
+        
+
+        public void Init()
+        {
+            var ab = AssetBundle.LoadFromMemory(Properties.Resources.eviesbackpacks);
+            IronBackpackPrefab = InitPrefab(ab,
+                "Assets/Evie/CapeIronBackpack.prefab");
+            LoadCraftedItem(IronBackpackPrefab, new List<Piece.Requirement>
+            {
+                MockRequirement.Create("LeatherScraps", 10),
+                MockRequirement.Create("DeerHide", 2),
+                MockRequirement.Create("Iron", 4),
+            });
+            SilverBackpackPrefab = InitPrefab(ab, "Assets/Evie/CapeSilverBackpack.prefab");
+            LoadCraftedItem(SilverBackpackPrefab, new List<Piece.Requirement>
+            {
+                MockRequirement.Create("LeatherScraps", 5),
+                MockRequirement.Create("DeerHide", 10),
+                MockRequirement.Create("Silver", 4),
+            });
+            InitLocalisation();
         }
 
-        private void LoadAssets()
+        private GameObject InitPrefab(AssetBundle ab, string loc)
         {
-            BackpackAssetBundle = AssetBundle.LoadFromMemory(Properties.Resources.capeironbackpack);
-            BackpackPrefab = BackpackAssetBundle.LoadAsset<GameObject>("Assets/Evie/CapeIronBackpack.prefab");
-            if(!BackpackPrefab) Main.log.LogError($"Failed to load backpack.");
-            else
+            var prefab = ab.LoadAsset<GameObject>(loc);
+            if(!prefab) Main.log.LogWarning($"Failed to load prefab: {loc}");
+            return prefab;
+        }
+
+        private void LoadCraftedItem(GameObject prefab, List<Piece.Requirement> ingredients, string craftingStation = "piece_workbench")
+        {
+            if(prefab) 
             {
-                BackpackItem = new CustomItem(BackpackPrefab, true);
+                var CI = new CustomItem(prefab, true);
                 var recipe = ScriptableObject.CreateInstance<Recipe>();
-                recipe.m_item = BackpackPrefab.GetComponent<ItemDrop>();
-                recipe.m_craftingStation = Mock<CraftingStation>.Create("piece_workbench");
-                var recipeIngredients = new List<Piece.Requirement>
+                recipe.m_item = prefab.GetComponent<ItemDrop>();
+                recipe.m_craftingStation = Mock<CraftingStation>.Create(craftingStation);
+                recipe.m_resources = ingredients.ToArray();
+                var CR = new CustomRecipe(recipe, true, true);
+                ObjectDBHelper.Add(CI);
+                ObjectDBHelper.Add(CR);
+                Main.log.LogDebug($"Successfully loaded new CraftedItem {prefab.name} for {craftingStation}.");
+            }
+        }
+
+        private static void InitLocalisation()
+        {
+            ResourceSet resourceSet =   Resources.ResourceManager.GetResourceSet(CultureInfo.CurrentUICulture, true, true);
+            foreach (DictionaryEntry token in resourceSet)
+            {
+                if (token.Key.ToString().StartsWith("$"))
                 {
-                    MockRequirement.Create("LeatherScraps", 10),
-                    MockRequirement.Create("DeerHide", 2),
-                    MockRequirement.Create("Iron", 4),
-                };
-                recipe.m_resources = recipeIngredients.ToArray();
-                BackpackRecipe = new CustomRecipe(recipe, true, true);
-                
-                ObjectDBHelper.Add(BackpackRecipe);
-                Language.AddToken(BackpackToken, BackpackName);
-                Language.AddToken(BackpackDescriptionToken, BackpackDescriptionText);
+                    Language.AddToken(token.Key.ToString(), token.Value.ToString());
+                    Main.log.LogDebug($"Added language token for {token.Key}:{token.Value}");
+                }
             }
         }
     }
