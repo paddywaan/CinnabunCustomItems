@@ -3,13 +3,12 @@ using BepInEx.Logging;
 using HarmonyLib;
 using System.IO;
 using System.Reflection;
-using ValheimLib;
-using ValheimLib.ODB;
 using ValheimLib.Util;
 
 
 namespace Backpack
 {
+    [BepInDependency(ValheimLib.ValheimLib.ModGuid)]
     [BepInPlugin(GUID, MODNAME, VERSION)]
     public class Main : BaseUnityPlugin
     {
@@ -40,7 +39,7 @@ namespace Backpack
         {
             Hooks.Init();
             ModAssets.Instance.Init();
-            BoneReorder.Apply();
+            BoneReorder.ApplyOnEquipmentChanged();
         }
     }
     

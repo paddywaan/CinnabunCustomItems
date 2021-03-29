@@ -86,7 +86,7 @@ namespace Backpack
             {
                 if (token.Key.ToString().StartsWith("$"))
                 {
-                    Language.AddToken(token.Key.ToString(), token.Value.ToString());
+                    Language.AddToken(token.Key.ToString(), token.Value.ToString(), false);
                     Main.log.LogDebug($"Added language token for {token.Key}:{token.Value}");
                 }
             }
