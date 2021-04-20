@@ -3,12 +3,13 @@ using BepInEx.Logging;
 using HarmonyLib;
 using System.IO;
 using System.Reflection;
-using ValheimLib.Util;
+using BepInEx.Configuration;
+using JotunnLib.Utils;
 
 
 namespace Backpack
 {
-    [BepInDependency(ValheimLib.ValheimLib.ModGuid)]
+    [BepInDependency(JotunnLib.Main.ModGuid)]
     [BepInPlugin(GUID, MODNAME, VERSION)]
     public class Main : BaseUnityPlugin
     {
@@ -27,20 +28,23 @@ namespace Backpack
 
         #endregion
 
+        private ConfigEntry<float> testEntry;
         public Main()
         {
             log = Logger;
             harmony = new Harmony(GUID);
             assembly = Assembly.GetExecutingAssembly();
             modFolder = Path.GetDirectoryName(assembly.Location);
+            
         }
 
         public void Start()
         {
+            testEntry = Config.Bind("Section", "Key", 1f, new ConfigDescription("Description", new AcceptableValueRange<float>(0f, 100f)));
+            //Configs.genSettings = Config;
             Hooks.Init();
             ModAssets.Instance.Init();
             BoneReorder.ApplyOnEquipmentChanged();
         }
     }
-    
 }

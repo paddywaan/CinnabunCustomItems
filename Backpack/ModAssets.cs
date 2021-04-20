@@ -5,8 +5,8 @@ using System.Globalization;
 using System.Reflection;
 using System.Resources;
 using UnityEngine;
-using ValheimLib;
-using ValheimLib.ODB;
+using JotunnLib;
+using JotunnLib.Entities;
 using Resources = Backpack.Properties.Resources;
 
 namespace Backpack
@@ -36,7 +36,7 @@ namespace Backpack
 
         public void Init()
         {
-            var ab = AssetBundle.LoadFromMemory(Properties.Resources.eviesbackpacks);
+            var ab = AssetBundle.LoadFromMemory(Properties.Resources.capeironbackpack__1_);
             IronBackpackPrefab = InitPrefab(ab,
                 "Assets/Evie/CapeIronBackpack.prefab");
             LoadCraftedItem(IronBackpackPrefab, new List<Piece.Requirement>
@@ -45,14 +45,14 @@ namespace Backpack
                 MockRequirement.Create("DeerHide", 2),
                 MockRequirement.Create("Iron", 4),
             });
-            SilverBackpackPrefab = InitPrefab(ab, 
-                "Assets/Evie/CapeSilverBackpack.prefab");
-            LoadCraftedItem(SilverBackpackPrefab, new List<Piece.Requirement>
-            {
-                MockRequirement.Create("LeatherScraps", 5),
-                MockRequirement.Create("DeerHide", 10),
-                MockRequirement.Create("Silver", 4),
-            });
+            //SilverBackpackPrefab = InitPrefab(ab, 
+            //    "Assets/Evie/CapeSilverBackpack.prefab");
+            //LoadCraftedItem(SilverBackpackPrefab, new List<Piece.Requirement>
+            //{
+            //    MockRequirement.Create("LeatherScraps", 5),
+            //    MockRequirement.Create("DeerHide", 10),
+            //    MockRequirement.Create("Silver", 4),
+            //});
             InitLocalisation();
         }
 
@@ -73,8 +73,8 @@ namespace Backpack
                 recipe.m_craftingStation = Mock<CraftingStation>.Create(craftingStation);
                 recipe.m_resources = ingredients.ToArray();
                 var CR = new CustomRecipe(recipe, true, true);
-                ObjectDBHelper.Add(CI);
-                ObjectDBHelper.Add(CR);
+                JotunnLib.Managers.ItemManager.Instance.AddItem(CI);
+                JotunnLib.Managers.ItemManager.Instance.AddRecipe(CR);
                 Main.log.LogDebug($"Successfully loaded new CraftedItem {prefab.name} for {craftingStation}.");
             }
         }
@@ -86,7 +86,7 @@ namespace Backpack
             {
                 if (token.Key.ToString().StartsWith("$"))
                 {
-                    Language.AddToken(token.Key.ToString(), token.Value.ToString(), false);
+                    JotunnLib.Managers.LocalizationManager.Instance.AddToken(token.Key.ToString(), token.Value.ToString(), false);
                     Main.log.LogDebug($"Added language token for {token.Key}:{token.Value}");
                 }
             }

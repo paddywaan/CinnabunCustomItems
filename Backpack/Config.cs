@@ -8,13 +8,15 @@ using System.Threading.Tasks;
 
 namespace Backpack
 {
-    public static class Config
+    public static class Configs
     {
-        private static ConfigFile genSettings;
+        public static ConfigFile genSettings;
+        private static ConfigEntry<float> testSetting;
 
-        static Config()
+        static Configs()
         {
             genSettings = new ConfigFile(Path.Combine(BepInEx.Paths.ConfigPath, Main.GUID + ".cfg"), true);
+            testSetting = genSettings.Bind("Section", "Key", 1f, new ConfigDescription("Description", new AcceptableValueRange<float>(0f, 100f)));
         }
     }
 }
