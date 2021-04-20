@@ -36,7 +36,7 @@ namespace Backpack
 
         public void Init()
         {
-            var ab = AssetBundle.LoadFromMemory(Properties.Resources.capeironbackpack__1_);
+            var ab = AssetBundle.LoadFromMemory(Properties.Resources.eviesbackpacks);
             IronBackpackPrefab = InitPrefab(ab,
                 "Assets/Evie/CapeIronBackpack.prefab");
             LoadCraftedItem(IronBackpackPrefab, new List<Piece.Requirement>
@@ -45,14 +45,14 @@ namespace Backpack
                 MockRequirement.Create("DeerHide", 2),
                 MockRequirement.Create("Iron", 4),
             });
-            //SilverBackpackPrefab = InitPrefab(ab, 
-            //    "Assets/Evie/CapeSilverBackpack.prefab");
-            //LoadCraftedItem(SilverBackpackPrefab, new List<Piece.Requirement>
-            //{
-            //    MockRequirement.Create("LeatherScraps", 5),
-            //    MockRequirement.Create("DeerHide", 10),
-            //    MockRequirement.Create("Silver", 4),
-            //});
+            SilverBackpackPrefab = InitPrefab(ab,
+                "Assets/Evie/CapeSilverBackpack.prefab");
+            LoadCraftedItem(SilverBackpackPrefab, new List<Piece.Requirement>
+            {
+                MockRequirement.Create("LeatherScraps", 5),
+                MockRequirement.Create("DeerHide", 10),
+                MockRequirement.Create("Silver", 4),
+            });
             InitLocalisation();
         }
 
