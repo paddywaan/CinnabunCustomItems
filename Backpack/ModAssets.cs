@@ -50,7 +50,7 @@ namespace Backpack
             LoadCraftedItem(SilverBackpackPrefab, new List<Piece.Requirement>
             {
                 MockRequirement.Create("LeatherScraps", 5),
-                MockRequirement.Create("DeerHide", 10),
+                MockRequirement.Create("WolfPelt", 6),
                 MockRequirement.Create("Silver", 4),
             });
             InitLocalisation();
