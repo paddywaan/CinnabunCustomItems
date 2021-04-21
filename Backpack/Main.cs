@@ -16,7 +16,7 @@ namespace Backpack
         #region[Declarations]
 
         public const string
-            MODNAME = "Backpack",
+            MODNAME = "Backpacks",
             AUTHOR = "Cinnabun",
             GUID = AUTHOR + "_" + MODNAME,
             VERSION = "1.0.0";
