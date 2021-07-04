@@ -1,12 +1,12 @@
-﻿using System;
+﻿using Jotunn.Entities;
+using Jotunn.Managers;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Reflection;
 using System.Resources;
-using UnityEngine;
-using JotunnLib;
-using JotunnLib.Entities;
+using UnityEngine; 
 using Resources = Backpack.Properties.Resources;
 
 namespace Backpack
@@ -73,8 +73,8 @@ namespace Backpack
                 recipe.m_craftingStation = Mock<CraftingStation>.Create(craftingStation);
                 recipe.m_resources = ingredients.ToArray();
                 var CR = new CustomRecipe(recipe, true, true);
-                JotunnLib.Managers.ItemManager.Instance.AddItem(CI);
-                JotunnLib.Managers.ItemManager.Instance.AddRecipe(CR);
+                ItemManager.Instance.AddItem(CI);
+                ItemManager.Instance.AddRecipe(CR);
                 Main.log.LogDebug($"Successfully loaded new CraftedItem {prefab.name} for {craftingStation}.");
             }
         }
@@ -86,7 +86,7 @@ namespace Backpack
             {
                 if (token.Key.ToString().StartsWith("$"))
                 {
-                    JotunnLib.Managers.LocalizationManager.Instance.AddToken(token.Key.ToString(), token.Value.ToString(), false);
+                    LocalizationManager.Instance.AddToken(token.Key.ToString(), token.Value.ToString(), false);
                     Main.log.LogDebug($"Added language token for {token.Key}:{token.Value}");
                 }
             }
