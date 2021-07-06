@@ -69,6 +69,7 @@ namespace Backpack
             {
                 var CI = new CustomItem(prefab, true);
                 var recipe = ScriptableObject.CreateInstance<Recipe>();
+                recipe.name = prefab.name;
                 recipe.m_item = prefab.GetComponent<ItemDrop>();
                 recipe.m_craftingStation = Mock<CraftingStation>.Create(craftingStation);
                 recipe.m_resources = ingredients.ToArray();
