@@ -4,12 +4,11 @@ using HarmonyLib;
 using System.IO;
 using System.Reflection;
 using BepInEx.Configuration;
-using JotunnLib.Utils;
-
+using Jotunn.Utils;
 
 namespace Backpack
 {
-    [BepInDependency(JotunnLib.Main.ModGuid)]
+    [BepInDependency(Jotunn.Main.ModGuid)]
     [BepInPlugin(GUID, MODNAME, VERSION)]
     public class Main : BaseUnityPlugin
     {
@@ -27,8 +26,7 @@ namespace Backpack
         public readonly string modFolder;
 
         #endregion
-
-        private ConfigEntry<float> testEntry;
+         
         public Main()
         {
             log = Logger;
@@ -39,8 +37,7 @@ namespace Backpack
         }
 
         public void Start()
-        {
-            testEntry = Config.Bind("Section", "Key", 1f, new ConfigDescription("Description", new AcceptableValueRange<float>(0f, 100f)));
+        { 
             //Configs.genSettings = Config;
             Hooks.Init();
             ModAssets.Instance.Init();
